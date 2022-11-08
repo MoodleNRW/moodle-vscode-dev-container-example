@@ -1,0 +1,33 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+{
+  "name": "Moodle + PHP + MariaDB",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "moodle",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "xdebug.php-debug",
+        "bmewburn.vscode-intelephense-client",
+        "mrmlnc.vscode-apache",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+
+  "forwardPorts": [8080, 3306, 8025],
+  "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
+  "postStartCommand": "nohup bash ./.devcontainer/postStartCommand.sh >/dev/null 2>&1", // This disables outputting a local nohup log
+  "remoteUser": "vscode",
+  "remoteEnv": {
+    "MOODLE_VERSION": "400", //e.g. 311 400 etc. - multiple selections are possible!
+    "ADMIN_NAME": "admin",
+    "ADMIN_PASS": "SecretP4$$word",
+    "ADMIN_MAIL": "admin@mdev.dev",
+    "DB_ROOT_PWD": "mariadb",
+    "DB_HOST": "db",
+    "DB_NAME": "moodle",
+    "DB_USER": "moodle",
+    "DB_USER_PWD": "moodle"
+  }
+}
