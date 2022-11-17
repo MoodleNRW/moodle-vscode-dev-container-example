@@ -49,6 +49,9 @@ if [ ! -f "$CFGFILE" ]; then
   sudo php $MOODLEDIR/admin/cli/install.php --dbtype=mariadb --dbhost=${DB_HOST} --dbname=${MDL_VERSION_DB} --dbuser=${MDL_VERSION_DB_USER} --dbpass=${DB_USER_PWD} --prefix="mdl_" --fullname="Moodle Development ${MDL_VERSION}" --shortname="MDEV${MDL_VERSION}" --wwwroot="http://localhost:8080/moodle-${MDL_VERSION}" --dataroot=$DATADIR --adminuser="${ADMIN_NAME}" --adminpass="${ADMIN_PASS}" --adminemail="${ADMIN_MAIL}" --non-interactive --agree-license &&
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=smtphosts --set="localhost:1025"
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=noreplyaddress --set=${ADMIN_MAIL}
+  sudo php $MOODLEDIR/admin/cli/cfg.php --name=cachejs --set=0
+  sudo php $MOODLEDIR/admin/cli/cfg.php --name=cachetemplates --set=0
+  sudo php $MOODLEDIR/admin/cli/cfg.php --name=themedesignermode --set=1
   # Set rights on newly downloaded files
   sudo chmod -R a+xr $PWD
 fi
