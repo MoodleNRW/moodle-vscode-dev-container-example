@@ -5,6 +5,7 @@
 ### 1. WSL2 installieren
 https://learn.microsoft.com/de-de/windows/wsl/install
 * In der Regel genügt es, den Befehl `wsl --install` in einem Windows Terminal mit Admin-Rechten auszuführen.
+* Windows muss ggfs. neu gestartet werden.
 
 ### 2. Docker Desktop für Windows installieren
 https://www.docker.com/
