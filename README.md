@@ -7,12 +7,20 @@ https://learn.microsoft.com/de-de/windows/wsl/install
 * In der Regel genügt es, den Befehl `wsl --install` in einem Windows Terminal mit Admin-Rechten auszuführen.
 * Windows muss ggfs. neu gestartet werden.
 
-### 2. Docker Desktop für Windows installieren
+### 2.a Docker Desktop für Windows installieren
 https://www.docker.com/
 * Beim Installieren darauf achten, dass das Häkchen ✔️ bei *Use WSL 2 instead of Hyper-V (recommended)* gesetzt ist.
 * Anschließend Docker starten. Sobald das Rechteck unten links grün wird (beim Darüberfahren mit der Maus erscheint der Tooltip *Engine running*),
 kann das Fenster geschlossen werden ❌
 * ❗ Wichtig: Docker sollte weiterhin im Systemtray laufen (unten rechts in der Taskbar) ❗
+
+### 2.b Docker Desktop für Mac installieren
+https://www.docker.com/
+* Beim Download darauf achten, dass die richtige Chip-Variante ausgewählt wird (Intel Chip amd-64 vs Apple Chip arm-64).
+* Herrausfindbar ist dies über das Apple-Menü () -> "Über diesen Mac" -> Chip / Prozessor Bezeichnung.
+* Anschließend Docker starten. Sobald das Rechteck unten links grün wird (beim Darüberfahren mit der Maus erscheint der Tooltip *Engine running*),
+kann das Fenster geschlossen werden ❌
+* ❗ Wichtig: Docker sollte weiterhin laufen und der Prozess sollte nicht manuell beendet werden ❗
 
 ### 3. Visual Studio Code installieren
 https://code.visualstudio.com/
