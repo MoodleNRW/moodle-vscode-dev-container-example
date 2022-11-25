@@ -14,11 +14,15 @@
       ]
     }
   },
-
+  // Set ports to be forwarded to host
   "forwardPorts": [8080, 3306, 8025],
+  // Download, install & configure Moodle
   "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
+  // Start Apache and Cron
   "postStartCommand": "nohup bash ./.devcontainer/postStartCommand.sh >/dev/null 2>&1", // This disables outputting a local nohup log
+  // Set local container user
   "remoteUser": "vscode",
+  // Set environment variables, 
   "remoteEnv": {
     "MOODLE_VERSION": "400", //e.g. 311 400 etc. - multiple selections are possible!
     "ADMIN_NAME": "admin",
