@@ -6,7 +6,7 @@ done
 
 PWD="$(pwd)"
 
-sudo chmod a+x $PWD && 
+sudo chmod 775 $PWD &&
 sudo rm -rf /var/www/html && 
 sudo ln -s $PWD /var/www/html &&
 

@@ -31,7 +31,21 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-configure gd
 RUN docker-php-ext-install gd
 
+# Install xmlrpc
+RUN docker-php-ext-install xmlrpc;
+RUN docker-php-ext-enable xmlrpc;
+
+# Install soap
+RUN docker-php-ext-install soap;
+
+# Install opcache
+RUN docker-php-ext-install opcache;
+
+# Install exif
+RUN docker-php-ext-install exif;
+
 # Set PHP variables for moodle
 RUN echo 'max_execution_time = 300' >> /usr/local/etc/php/conf.d/docker-php-maxexectime.ini;
 RUN echo 'upload_max_filesize = 2048M' >> /usr/local/etc/php/conf.d/docker-php-uploadmaxfilesize.ini;
 RUN echo 'post_max_size = 2048M' >> /usr/local/etc/php/conf.d/docker-php-postmaxsize.ini;
+RUN echo 'max_input_vars = 5000' >> /usr/local/etc/php/conf.d/docker-php-maxinputvars.ini;
