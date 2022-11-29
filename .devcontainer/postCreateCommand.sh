@@ -20,13 +20,13 @@ fi
 
 if [ ! -d "$DATADIR" ]; then
   sudo mkdir -p $DATADIR &&
-  sudo chmod a+x $DATADIR
+  sudo chown www-data:www-data $DATADIR &&
+  sudo chmod 700 $DATADIR
 fi
 
 MOODLEDIR=$PWD/moodle-${MDL_VERSION}
 if [ ! -d "$MOODLEDIR" ]; then
   git clone -b MOODLE_${MDL_VERSION}_STABLE https://github.com/moodle/moodle.git $MOODLEDIR
-  # sudo rm -rf $MOODLEDIR/.git
 fi
 
 CFGFILE=$MOODLEDIR/config.php
@@ -41,9 +41,9 @@ if [ ! -f "$CFGFILE" ]; then
   sudo mysql -h ${DB_HOST} -u root -p${DB_ROOT_PWD} -e "DROP DATABASE IF EXISTS ${MDL_VERSION_DB};"
   sudo mysql -h ${DB_HOST} -u root -p${DB_ROOT_PWD} -e "DROP USER IF EXISTS ${MDL_VERSION_DB_USER}@'%';"
   # Create database entitites for current version
-  sudo mysql -h ${DB_HOST} -u root -p${DB_ROOT_PWD} -e "CREATE DATABASE ${MDL_VERSION_DB};"
+  sudo mysql -h ${DB_HOST} -u root -p${DB_ROOT_PWD} -e "CREATE DATABASE ${MDL_VERSION_DB} DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
   sudo mysql -h ${DB_HOST} -u root -p${DB_ROOT_PWD} -e "CREATE USER ${MDL_VERSION_DB_USER}@'%' IDENTIFIED BY '${DB_USER_PWD}';"
-  sudo mysql -h ${DB_HOST} -u root -p${DB_ROOT_PWD} -e "GRANT ALL PRIVILEGES ON ${MDL_VERSION_DB}.* TO ${MDL_VERSION_DB_USER}@'%';"
+  sudo mysql -h ${DB_HOST} -u root -p${DB_ROOT_PWD} -e "GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON ${MDL_VERSION_DB}.* TO ${MDL_VERSION_DB_USER}@'%';"
   sudo mysql -h ${DB_HOST} -u root -p${DB_ROOT_PWD} -e "FLUSH PRIVILEGES;"
   # Run moodle install cli
   sudo php $MOODLEDIR/admin/cli/install.php --dbtype=mariadb --dbhost=${DB_HOST} --dbname=${MDL_VERSION_DB} --dbuser=${MDL_VERSION_DB_USER} --dbpass=${DB_USER_PWD} --prefix="mdl_" --fullname="Moodle Development ${MDL_VERSION}" --shortname="MDEV${MDL_VERSION}" --wwwroot="http://localhost:8080/moodle-${MDL_VERSION}" --dataroot=$DATADIR --adminuser="${ADMIN_NAME}" --adminpass="${ADMIN_PASS}" --adminemail="${ADMIN_MAIL}" --non-interactive --agree-license &&
@@ -54,7 +54,11 @@ if [ ! -f "$CFGFILE" ]; then
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=cachetemplates --set=0
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=themedesignermode --set=1
   # Set rights on newly downloaded files
-  # sudo chmod -R a+xr $PWD
+  sudo chown -R www-data:www-data $MOODLEDIR
+  sudo find $MOODLEDIR -type d -exec chmod 755 {} +
+  sudo find $MOODLEDIR -type f -exec chmod g+w {} +
+  # Enable git
+  git config --global --add safe.directory $MOODLEDIR
 fi
 
 # Add cronjob for instance
