@@ -16,7 +16,7 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends cron libzip-dev zip libpng-dev libicu-dev libxml2-dev libyaml-dev libxslt-dev
+    && apt-get -y install --no-install-recommends cron libzip-dev zip libpng-dev libicu-dev libxml2-dev libyaml-dev libxslt-dev libwebp-dev libfreetype6-dev libjpeg62-turbo-dev
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
@@ -28,21 +28,21 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install intl
 
 # Install gd
-RUN docker-php-ext-configure gd
+RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 RUN docker-php-ext-install gd
 
 # Install xmlrpc
-RUN docker-php-ext-install xmlrpc;
-RUN docker-php-ext-enable xmlrpc;
+RUN docker-php-ext-install xmlrpc
+RUN docker-php-ext-enable xmlrpc
 
 # Install soap
-RUN docker-php-ext-install soap;
+RUN docker-php-ext-install soap
 
 # Install opcache
-RUN docker-php-ext-install opcache;
+RUN docker-php-ext-install opcache
 
 # Install exif
-RUN docker-php-ext-install exif;
+RUN docker-php-ext-install exif
 
 # Set PHP variables for moodle
 RUN echo 'max_execution_time = 300' >> /usr/local/etc/php/conf.d/docker-php-maxexectime.ini;
