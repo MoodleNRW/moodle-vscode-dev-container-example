@@ -35,14 +35,23 @@ kann das Fenster geschlossen werden ❌
 ## Installation VSCode und Inbetriebnahme
 
 ### 1. Visual Studio Code installieren
+
+#### Installation unter Windows
 https://code.visualstudio.com/
 * Beim Starten von VS Code sollte Docker auf dem System erkannt werden und das Installieren der empfohlenen Erweiterungen vorgeschlagen werden:
 Dev Containers von Microsoft (`ms-vscode-remote.remote-containers`) und - im Falle von Windows - WSL von Microsoft (`ms-vscode-remote.remote-wsl`). Diese Erweiterungen installieren.
 
-#### Empfehlung Windows
+##### Empfehlung Windows
 Da PHP-Anwendungen in Docker unter Windows Performanceprobleme haben können (wie es bei Moodle leider der Fall ist) empfiehlt es sich, den Devcontainer direkt aus der WSL heraus zu bedienen. Dazu mit der WSL Extension in VSCode in die WSL verbinden (über die Schaltfläche unten links) und das Verzeichnis direkt in die WSL clonen.
 
-#### Empfehlung macOS
+#### Installation unter macOS
+Installation mit [Homebrew](http://brew.sh) und [Homebrew Cask](http://caskroom.io/).
+```bash
+brew install --cask visual-studio-code
+```
+Alternativ kann Visual Studio Code auch direkt unter https://code.visualstudio.com/ heruntergeladen werden.
+
+##### Empfehlung macOS
 Um die Performance von Docker unter macOS maßgeblich zu verbessern sollte der VirtioFS Treiber aktiviert sein. Dieser findet sich in Docker Desktop unter *Settings -> Beta features -> Enable VirtioFS accelerated directory sharing*.
 
 ### 2. Container starten
