@@ -58,6 +58,9 @@ brew install --cask visual-studio-code
 ```
 #### Variante 2: Über Download von der Webseite
 https://code.visualstudio.com/
+    
+#### Empfehlung macOS
+Um die Performance von Docker unter macOS maßgeblich zu verbessern sollte der VirtioFS Treiber aktiviert sein. Dieser findet sich in Docker Desktop unter *Settings -> Beta features -> Enable VirtioFS accelerated directory sharing*.
 
 ## Erster Start von VSCode <a name="vscode-start">
 Beim Starten von VS Code sollte Docker auf dem System erkannt werden und das Installieren der empfohlenen Erweiterungen vorgeschlagen werden:
