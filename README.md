@@ -20,7 +20,7 @@ kann das Fenster geschlossen werden ❌
 Der elleganteste Weg zur Installation ist mit [Homebrew](http://brew.sh) und [Homebrew Cask](http://caskroom.io/).
 
 ```bash
-brew cask install docker       # Installiert Docker
+brew install --cask docker       # Installiert Docker
 open /Applications/Docker.app  # Startet Docker
 ```
 
