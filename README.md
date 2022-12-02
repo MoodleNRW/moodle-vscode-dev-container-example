@@ -17,7 +17,15 @@ kann das Fenster geschlossen werden ❌
 ## Installation unter macOS
 
 ### 1. Docker Desktop für Mac installieren
-https://www.docker.com/
+Der elleganteste Weg zur Installation ist mit [Homebrew](http://brew.sh) und [Homebrew Cask](http://caskroom.io/).
+
+```bash
+brew cask install docker       # Installiert Docker
+open /Applications/Docker.app  # Startet Docker
+```
+
+Alternativ kann Docker auch direkt unter https://www.docker.com/ heruntergeladen werden.
+
 * Beim Download darauf achten, dass die richtige Chip-Variante ausgewählt wird (Intel Chip amd-64 vs Apple Chip arm-64).
 * Herrausfindbar ist dies über das Apple-Menü () -> "Über diesen Mac" -> Chip / Prozessor Bezeichnung.
 * Anschließend Docker starten. Sobald das Rechteck unten links grün wird (beim Darüberfahren mit der Maus erscheint der Tooltip *Engine running*),
