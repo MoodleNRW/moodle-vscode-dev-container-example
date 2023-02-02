@@ -31,10 +31,6 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 RUN docker-php-ext-install gd
 
-# Install xmlrpc
-RUN docker-php-ext-install xmlrpc
-RUN docker-php-ext-enable xmlrpc
-
 # Install soap
 RUN docker-php-ext-install soap
 
