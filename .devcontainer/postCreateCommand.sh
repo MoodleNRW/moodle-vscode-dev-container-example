@@ -6,13 +6,26 @@ done
 
 PWD="$(pwd)"
 
+# Moosh
+if [ "$INSTALL_MOOSH" == "TRUE" ]; then
+echo -e "\nInstall MOOSH\n"
+if [ ! -d /opt ]; then sudo mkdir /opt ; fi
+sudo git clone https://github.com/tmuras/moosh.git /opt/moosh
+sudo rm -rf /opt/moosh/.git
+sudo composer update --with-dependencies --working-dir=/opt/moosh
+sudo composer install --working-dir=/opt/moosh
+sudo ln -s /opt/moosh/moosh.php /usr/local/bin/moosh
+fi
+
+# Moodle
+echo -e "\nInstall Moodle\n"
 sudo chmod 770 $PWD &&
 sudo chown www-data:www-data $PWD &&
 sudo rm -rf /var/www/html && 
 sudo ln -s $PWD /var/www/html &&
 
 for MDL_VERSION in $MOODLE_VERSION; do
-echo "Setting up environment for ${MDL_VERSION}"
+echo -e "\nSetting up environment for ${MDL_VERSION}\n"
 
 DATADIR=/var/www/moodledata-${MDL_VERSION}
 if [ -d "$DATADIR" ]; then
@@ -27,7 +40,7 @@ fi
 
 MOODLEDIR=$PWD/moodle-${MDL_VERSION}
 if [ ! -d "$MOODLEDIR" ]; then
-  git clone -b MOODLE_${MDL_VERSION}_STABLE https://github.com/moodle/moodle.git $MOODLEDIR
+  git clone -b MOODLE_${MDL_VERSION}_STABLE https://github.com/moodle/moodle.git $MOODLEDIR --depth 1
 fi
 
 CFGFILE=$MOODLEDIR/config.php
@@ -60,6 +73,17 @@ if [ ! -f "$CFGFILE" ]; then
   sudo find $MOODLEDIR -type f -exec chmod g+w {} +
   # Enable git
   git config --global --add safe.directory $MOODLEDIR
+fi
+
+if [ $INSTALL_MOOSH == "TRUE" ]; then
+echo -e "\n[MOOSH] Install language pack de\n"
+moosh -n -p $MOODLEDIR language-install de
+
+echo -e "\n[MOOSH] Create 10 new courses\n"
+moosh -n -p $MOODLEDIR course-create newcourse{1..10}
+
+echo -e "\n[MOOSH] Create 10 new user\n"
+moosh -n -p $MOODLEDIR user-create testuser{1..10}
 fi
 
 # Add cronjob for instance
