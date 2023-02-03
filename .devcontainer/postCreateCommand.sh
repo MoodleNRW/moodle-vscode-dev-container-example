@@ -7,15 +7,15 @@ done
 PWD="$(pwd)"
 
 # Moosh
+if [ "$INSTALL_MOOSH" == "TRUE" ]; then
 echo -e "\nInstall MOOSH\n"
 if [ ! -d /opt ]; then sudo mkdir /opt ; fi
-cd /opt
-sudo git clone https://github.com/tmuras/moosh.git 
-cd moosh
-sudo rm -rf .git
-sudo composer install
-sudo ln -s $PWD/moosh.php /usr/local/bin/moosh
-cd ..
+sudo git clone https://github.com/tmuras/moosh.git /opt/moosh
+sudo rm -rf /opt/moosh/.git
+sudo composer update --with-dependencies --working-dir=/opt/moosh
+sudo composer install --working-dir=/opt/moosh
+sudo ln -s /opt/moosh/moosh.php /usr/local/bin/moosh
+fi
 
 # Moodle
 echo -e "\nInstall Moodle\n"
@@ -75,6 +75,7 @@ if [ ! -f "$CFGFILE" ]; then
   git config --global --add safe.directory $MOODLEDIR
 fi
 
+if [ $INSTALL_MOOSH == "TRUE" ]; then
 echo -e "\n[MOOSH] Install language pack de\n"
 moosh -n -p $MOODLEDIR language-install de
 
@@ -83,6 +84,7 @@ moosh -n -p $MOODLEDIR course-create newcourse{1..10}
 
 echo -e "\n[MOOSH] Create 10 new user\n"
 moosh -n -p $MOODLEDIR user-create testuser{1..10}
+fi
 
 # Add cronjob for instance
 (sudo crontab -l 2>/dev/null; echo "* * * * * /usr/local/bin/php /var/www/html/moodle-${MDL_VERSION}/admin/cli/cron.php > /dev/null") | sudo crontab -

@@ -22,7 +22,7 @@
   "postStartCommand": "nohup bash ./.devcontainer/postStartCommand.sh >/dev/null 2>&1", // This disables outputting a local nohup log
   // Set local container user
   "remoteUser": "vscode",
-  // Set environment variables, 
+  // Set environment variables,
   "remoteEnv": {
     "MOODLE_VERSION": "401", //e.g. 311 400 etc. - multiple selections are possible!
     "ADMIN_NAME": "admin",
@@ -32,6 +32,7 @@
     "DB_HOST": "db",
     "DB_NAME": "moodle",
     "DB_USER": "moodle",
-    "DB_USER_PWD": "moodle"
+    "DB_USER_PWD": "moodle",
+    "INSTALL_MOOSH": "TRUE"
   }
 }
