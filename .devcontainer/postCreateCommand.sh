@@ -19,8 +19,7 @@ fi
 
 # Moodle
 echo -e "\nInstall Moodle\n"
-sudo chmod 770 $PWD &&
-sudo chown www-data:www-data $PWD &&
+sudo chmod 755 $PWD &&
 sudo rm -rf /var/www/html && 
 sudo ln -s $PWD /var/www/html &&
 
@@ -68,9 +67,8 @@ if [ ! -f "$CFGFILE" ]; then
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=cachetemplates --set=0
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=themedesignermode --set=1
   # Set rights on newly downloaded files
-  sudo chown -R www-data:www-data $MOODLEDIR
-  sudo find $MOODLEDIR -type d -exec chmod 755 {} +
-  sudo find $MOODLEDIR -type f -exec chmod g+w {} +
+  sudo find $MOODLEDIR -type d -exec chmod -R 755 {} +
+  sudo find $MOODLEDIR -type f -exec chmod -R g+w {} +
   # Enable git
   git config --global --add safe.directory $MOODLEDIR
 fi
