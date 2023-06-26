@@ -14,7 +14,7 @@ services:
     command: sleep infinity
     network_mode: service:db
   db:
-    image: mariadb:10.4
+    image: mariadb:10.6
     restart: unless-stopped
     volumes:
       - mariadb-data:/var/lib/mysql
