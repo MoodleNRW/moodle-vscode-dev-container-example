@@ -67,8 +67,9 @@ if [ ! -f "$CFGFILE" ]; then
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=cachetemplates --set=0
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=themedesignermode --set=1
   # Set rights on newly downloaded files
-  sudo find $MOODLEDIR -type d -name .git -prune -exec chmod -R 755 {} +
-  sudo find $MOODLEDIR -type f ! -name '*.idx' ! -name '*.pack' -exec chmod -R g+w {} +
+  sudo chown -R vscode:vscode $MOODLEDIR
+  sudo find $MOODLEDIR -type d -name .git -prune -exec chmod -R 750 {} +
+  sudo find $MOODLEDIR -type f ! -name '*.idx' ! -name '*.pack' -exec chmod -R 740 {} +
   # Enable git
   sudo git config --global --add safe.directory $MOODLEDIR
 fi

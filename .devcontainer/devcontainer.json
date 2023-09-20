@@ -24,7 +24,7 @@
   "remoteUser": "vscode",
   // Set environment variables,
   "remoteEnv": {
-    "MOODLE_VERSION": "402", //e.g. 311 400 etc. - multiple selections are possible!
+    "MOODLE_VERSION": "401", //e.g. 311 400 etc. - multiple selections are possible!
     "ADMIN_NAME": "admin",
     "ADMIN_PASS": "SecretP4$$word",
     "ADMIN_MAIL": "admin@mdev.dev",
