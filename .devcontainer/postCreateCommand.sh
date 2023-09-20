@@ -67,10 +67,10 @@ if [ ! -f "$CFGFILE" ]; then
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=cachetemplates --set=0
   sudo php $MOODLEDIR/admin/cli/cfg.php --name=themedesignermode --set=1
   # Set rights on newly downloaded files
-  sudo find $MOODLEDIR -type d -exec chmod -R 755 {} +
-  sudo find $MOODLEDIR -type f -exec chmod -R g+w {} +
+  sudo find $MOODLEDIR -type d -name .git -prune -exec chmod -R 755 {} +
+  sudo find $MOODLEDIR -type f ! -name '*.idx' ! -name '*.pack' -exec chmod -R g+w {} +
   # Enable git
-  git config --global --add safe.directory $MOODLEDIR
+  sudo git config --global --add safe.directory $MOODLEDIR
 fi
 
 if [ $INSTALL_MOOSH == "TRUE" ]; then
